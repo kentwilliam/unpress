@@ -1,0 +1,11 @@
+source 'https://rubygems.org'
+
+gem 'sinatra'
+gem 'shotgun'
+gem 'feedjira'
+gem 'nokogiri'
+gem 'json'
+gem 'slim'
+gem 'coffee-script'
+gem 'stylus'
+gem 'autoprefixer-rails'
