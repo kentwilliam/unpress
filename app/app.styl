@@ -3,7 +3,7 @@
 
 body
   background #eee
-  font-family sans-serif
+  font-family Georgia, sans-serif
   font-weight 100
   color #555
   margin 0
@@ -17,19 +17,22 @@ body
   right 0
   bottom 0
 
-nav
-  width: 15%
-  padding 10px
-  overflow auto
-
 h1
   font-weight 100
   text-transform lowercase
+  margin 0 0 15px 15px
+  opacity 0.03
+  display none
+  img
+    height 30px
 
 .feeds
-  width: 40%
-  background white
+  width 33.33333%
   overflow auto
+  padding 5% 5% 50px 0
+  position relative
+  z-index 1
+  font-family sans-serif
 
   a
     display block
@@ -38,34 +41,43 @@ h1
     overflow hidden
     white-space nowrap
     text-decoration none
-    font-weight 100
-    color: #333
-    font-size 14px
-    padding 10px 15px
+    color #111
+    font-size 16px
+    padding 0 15px
+    line-height 36px
     transition 0.2s
-    border-bottom 1px solid #eee
+    position relative
+
+    b
+      font-weight 100
+
+    i
+      display none
 
     &:hover
       background #ccddff
 
     &:visited
       font-weight 100
-      color: #999
+      color #999
 
     b:after
-      content: ' '
+      content ' '
 
     i
       color #aaa
       font-style normal
 
 .reader
-  width: 45%
-  background #aaa
+  width 66.6666%
   overflow auto
-  padding 10px
+  padding 5% 6%
 
-  iframe
-    width 100%
-    border none
-    min-height 100%
+  .content
+    line-height 36px
+    margin 0 auto
+    max-width 40em
+    font-size 18px
+
+    p
+      margin 0 0 24px 0

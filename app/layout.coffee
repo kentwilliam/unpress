@@ -1,7 +1,7 @@
 component 'Layout',
   getInitialState: ->
     feeds: []
-    readerUrl: null
+    readerContent: ''
 
   componentWillMount: ->
     oboe('/feeds.json').done (feeds) =>
@@ -19,25 +19,19 @@ component 'Layout',
           ]
 
   onFeedClick: (event) ->
-    @setState
-      readerUrl: event.currentTarget.getAttribute 'href'
+    href = event.currentTarget.getAttribute 'href'
+    oboe('/url/' + encodeURI(href)).done (result) =>
+      @setState readerContent: result.content
     false
 
   render: ->
     dom.div
       className: 'layout'
       children: [
-
-        (dom.nav className: '', children: [
-          (dom.h1 children: 'Webcalm')
-        ])
-
-        (dom.div className: 'reader', children: @reader())
-
-        (dom.div className: 'feeds', children: @feeds())
+        (Reader content: @state.readerContent)
+        (dom.div className: 'feeds', children:
+          [
+            (dom.h1 children: (dom.img src: '/raed-logo.svg'))
+          ].concat @feeds())
       ]
 
-  reader: ->
-    return unless @state.readerUrl?
-
-    (dom.iframe src: @state.readerUrl)

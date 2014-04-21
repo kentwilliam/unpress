@@ -2,14 +2,18 @@ require 'pp'
 require 'sinatra/base'
 require 'feedjira'
 require 'nokogiri'
+require 'readability'
 require 'json'
 require 'slim'
 require 'coffee_script'
 require 'stylus'
 require 'autoprefixer-rails'
 
+require 'curb'
+
 FEEDS = {
-  'Wonderful blog' => 'http://transground.blogspot.com/feeds/posts/default'
+  'Wonderful blog' => 'http://transground.blogspot.com/feeds/posts/default'#,
+  # 'Gamer' => 'http://www.gamer.no/feeds/general.xml'
 }
 
 class Unpress < Sinatra::Base
@@ -22,6 +26,13 @@ class Unpress < Sinatra::Base
 
   get '/feeds.json' do
     feeds.to_json
+  end
+
+  get %r{/url/(.+)} do
+    url = params[:captures].first.gsub('http:/', 'http://')
+    src = Curl.get(url).body_str
+    content_type :json
+    { content: Readability::Document.new(src).content }.to_json
   end
 
   def feeds
